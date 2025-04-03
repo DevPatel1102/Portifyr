@@ -9,7 +9,7 @@ import ExperienceCard from './components/ExperienceCard';
 function App() {
   const [portfolio, setPortfolio] = useState({
     name: 'Dev Patel',
-    title: 'Full Stack Developer',
+    title: 'Web Developer',
     bio: 'Passionate developer with expertise in React, Node.js, and cloud technologies.',
     primaryColor: '#3b82f6',
     secondaryColor: '#1e40af',
