@@ -8,7 +8,7 @@ import ExperienceCard from './components/ExperienceCard';
 
 function App() {
   const [portfolio, setPortfolio] = useState({
-    name: 'Kevin Patel',
+    name: 'Kevin Barochiya',
     title: 'Full Stack Developer',
     bio: 'Passionate developer with expertise in React, Node.js, and cloud technologies.',
     primaryColor: '#3b82f6',
