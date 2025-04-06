@@ -1,12 +1,9 @@
-
-import React, { useState } from 'react';
-import {Login} from './components/Auth/Login'
-import {SignUp} from './components/Auth/SignUp'
+import React from 'react';
+import { LandingPage } from './components/LandingPage';
 
 function App(){
     return(
-      <Login></Login>
-      // <SignUp></SignUp>
+      <LandingPage/>
     );
 }
 export default App;
