@@ -3,8 +3,11 @@ import { Mail, Lock } from "lucide-react";
 import "./auth.css";
 import { auth } from '../../../firebaseconfig';
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 export const SignUp = () => {
+    const navigate = useNavigate();
+
     const [userEmail, setUserEmail] = useState("");
     const [userPassword, setUserPassword] = useState("");
     const [userConfirmPassword, setUserConfirmPassword] = useState("");
@@ -48,6 +51,7 @@ export const SignUp = () => {
                 try {
                     await signup();
                     alert("SignUp Successful!!");
+                    navigate('/login')
                 } catch (error) {
                     console.error("Signup failed:", error);
                     alert("Registration error occurred");
@@ -113,7 +117,7 @@ export const SignUp = () => {
 
                         <p className="signup-text">
                             Already have an account?{" "}
-                            <a href="#" className="signup-link">Login</a>
+                            <p className="signup-link" onClick={() => navigate('/login')}>Login</p>
                         </p>
                     </div>
                 </div>

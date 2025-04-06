@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { Mail, Lock } from "lucide-react";
 import { auth } from "../../../firebaseconfig";
+import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 import "./auth.css";
 
 export const Login = () => {
+
+    const navigate = useNavigate();
     const [userEmail, setUserEmail] = useState("");
     const [userPassword, setUserPassword] = useState("");
     const [errorEmail, setErrorEmail] = useState("");
@@ -35,6 +38,7 @@ export const Login = () => {
             try {
                 await login();
                 alert("Login Successful!!");
+                navigate('/');
             } catch (error) {
                 console.error("Login failed:", error);
                 alert("Incorrect email or password. Please try again.");
@@ -94,7 +98,7 @@ export const Login = () => {
 
                         <p className="signup-text">
                             Don't have an account?{" "}
-                            <a href="#" className="signup-link">Sign up</a>
+                            <p className="signup-link" onClick={() => navigate('/signup')}>Sign up</p>
                         </p>
                     </div>
                 </div>
