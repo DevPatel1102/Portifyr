@@ -5,8 +5,8 @@ import {SignUp} from './components/Auth/SignUp'
 
 function App(){
     return(
-      // <Login></Login>
-      <SignUp></SignUp>
+      <Login></Login>
+      // <SignUp></SignUp>
     );
 }
 export default App;

@@ -1,27 +1,63 @@
 import { useState } from "react";
 import { Mail, Lock } from "lucide-react";
 import "./auth.css";
+import { auth } from '../../../firebaseconfig';
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export const SignUp = () => {
     const [userEmail, setUserEmail] = useState("");
     const [userPassword, setUserPassword] = useState("");
     const [userConfirmPassword, setUserConfirmPassword] = useState("");
-    
-    const handleEmailChange = (e) => {
-        setUserEmail(e.target.value);
-    }
+    const [errorEmail, setErrorEmail] = useState("");
+    const [errorPassword, setErrorPassword] = useState("");
+    const [errorConfirmPassword, setErrorConfirmPassword] = useState("");
 
-    const handlePasswordChange = (e) => {
-        setUserPassword(e.target.value);
-    }
-    const handleConfirmPasswordChange = (e) => {
-        setUserConfirmPassword(e.target.value);
-    }
+    const handleSignUp = async () => {
+        
+        if (!userEmail.match(/^\S+@\S+\.\S+$/)) {
+            setErrorEmail("Enter a valid email address")
+        } else {
+            setErrorEmail("");
+        }
+        if (!userPassword) {
+            setErrorPassword("Password field can't be empty");
+        } else if (userPassword.length < 6) {
+            setErrorPassword("Password should be at least 6 characters");
+        } else {
+            setErrorPassword("");
+        }
 
-    const handleSignUp = () => {
-        alert(userEmail);
-        alert(userPassword);
+        if (!userConfirmPassword) {
+            setErrorConfirmPassword("Please confirm the password");
+        } else if (userConfirmPassword.length < 6) {
+            setErrorConfirmPassword("Password should be at least 6 characters");
+        } else {
+            setErrorConfirmPassword("");
+        }
+
+        if (
+            userPassword &&
+            userConfirmPassword &&
+            userPassword.length >= 6 &&
+            userConfirmPassword.length >= 6
+        ) {
+            if(userPassword !== userConfirmPassword){
+                setErrorPassword("Passwords don't match");
+                return;
+            }else{
+                try {
+                    await signup();
+                    alert("SignUp Successful!!");
+                } catch (error) {
+                    console.error("Signup failed:", error);
+                    alert("Registration error occurred");
+                }
+            }
+        }
     }
+    const signup = async () => {
+        await createUserWithEmailAndPassword(auth, userEmail, userPassword);
+    };
 
     return (
         <div className="login-container">
@@ -37,9 +73,10 @@ export const SignUp = () => {
                                     type="email"
                                     placeholder="Enter your email"
                                     value={userEmail}
-                                    onChange={handleEmailChange}
+                                    onChange={(e) => setUserEmail(e.target.value)}
                                 />
                             </div>
+                            <span className="error-message">{errorEmail}</span>
                         </div>
 
                         <div className="input-group">
@@ -50,9 +87,10 @@ export const SignUp = () => {
                                     type="password"
                                     placeholder="Enter your password"
                                     value={userPassword}
-                                    onChange={handlePasswordChange}
+                                    onChange={(e) => setUserPassword(e.target.value)}
                                 />
                             </div>
+                            <span className="error-message">{errorPassword}</span>
                         </div>
 
                         <div className="input-group">
@@ -63,9 +101,10 @@ export const SignUp = () => {
                                     type="password"
                                     placeholder="Confirm your password"
                                     value={userConfirmPassword}
-                                    onChange={handleConfirmPasswordChange}
+                                    onChange={(e) => setUserConfirmPassword(e.target.value)}
                                 />
                             </div>
+                            <span className="error-message">{errorConfirmPassword}</span>
                         </div>
 
                         <button onClick={handleSignUp} className="login-button">

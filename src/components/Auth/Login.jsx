@@ -1,22 +1,48 @@
 import { useState } from "react";
 import { Mail, Lock } from "lucide-react";
+import { auth } from "../../../firebaseconfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
 import "./auth.css";
 
 export const Login = () => {
     const [userEmail, setUserEmail] = useState("");
     const [userPassword, setUserPassword] = useState("");
+    const [errorEmail, setErrorEmail] = useState("");
+    const [errorPassword, setErrorPassword] = useState("");
 
-    const handleEmailChange = (e) => {
-        setUserEmail(e.target.value);
+    const handleLogin = async () => {
+
+        let hasError = false;
+
+        if (!userEmail.match(/^\S+@\S+\.\S+$/)) {
+            setErrorEmail("Enter a valid email address");
+            hasError = true;
+        } else {
+            setErrorEmail("");
+            hasError = false;
+        }
+        if (!userPassword) {
+            setErrorPassword("Password field can't be empty");
+            hasError = true;
+        } else {
+            hasError = false;
+            setErrorPassword("");
+        }
+
+        if (!hasError && userEmail && userPassword) {
+            try {
+                await login();
+                alert("Login Successful!!");
+            } catch (error) {
+                console.error("Login failed:", error);
+                alert("Incorrect email or password. Please try again.");
+            }
+        }
     }
 
-    const handlePasswordChange = (e) => {
-        setUserPassword(e.target.value);
-    }
-
-    const handleLogin = () => {
-        alert(userEmail);
-        alert(userPassword);
+    const login = async () => {
+        await signInWithEmailAndPassword(auth,userEmail,userPassword);
     }
 
     return (
@@ -33,9 +59,10 @@ export const Login = () => {
                                     type="email"
                                     placeholder="Enter your email"
                                     value={userEmail}
-                                    onChange={handleEmailChange}
+                                    onChange={(e) => setUserEmail(e.target.value)}
                                 />
                             </div>
+                            <span className="error-message">{errorEmail}</span>
                         </div>
 
                         <div className="input-group">
@@ -46,9 +73,10 @@ export const Login = () => {
                                     type="password"
                                     placeholder="Enter your password"
                                     value={userPassword}
-                                    onChange={handlePasswordChange}
+                                    onChange={(e) => setUserPassword(e.target.value)}
                                 />
                             </div>
+                            <span className="error-message">{errorPassword}</span>
                         </div>
 
                         <div className="options-group">
