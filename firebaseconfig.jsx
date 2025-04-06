@@ -7,8 +7,10 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const apk = import.meta.env.VITE_FIREBASE_API_KEY
+// console.log(apk)
 const firebaseConfig = {
-  apiKey: "AIzaSyCnWImaUZLn1_ne1mn9HdS6W4d7tOzMRWc",
+  apiKey: apk,
   authDomain: "portifyr.firebaseapp.com",
   projectId: "portifyr",
   storageBucket: "portifyr.firebasestorage.app",
