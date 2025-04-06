@@ -13,24 +13,25 @@ export const Login = () => {
 
     const handleLogin = async () => {
 
-        let hasError = false;
+        let hasEmailError = false;
+        let hasPasswordError = false;
 
         if (!userEmail.match(/^\S+@\S+\.\S+$/)) {
             setErrorEmail("Enter a valid email address");
-            hasError = true;
+            hasEmailError = true;
         } else {
             setErrorEmail("");
-            hasError = false;
+            hasEmailError = false;
         }
         if (!userPassword) {
             setErrorPassword("Password field can't be empty");
-            hasError = true;
+            hasPasswordError = true;
         } else {
-            hasError = false;
+            hasPasswordError = false;
             setErrorPassword("");
         }
 
-        if (!hasError && userEmail && userPassword) {
+        if (!hasEmailError && !hasPasswordError && userEmail && userPassword) {
             try {
                 await login();
                 alert("Login Successful!!");
