@@ -4,6 +4,7 @@ import { Footer } from "./LandingPage/Footer";
 import {Features} from "./LandingPage/Features";
 import {Showcase} from "./LandingPage/Showcase";
 import { InteractivePreviewSection } from "./LandingPage/InteractivePreviewSection";
+import { useAuth } from "../components/Auth/AuthContext";
 
 export const LandingPage = ()=>{
     return(
