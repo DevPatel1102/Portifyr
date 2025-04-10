@@ -8,7 +8,7 @@ export const InteractivePreviewSection = ()=>{
 
     const handleStartClick = () => {
         if (user) {
-            navigate("/");
+            navigate("/portfolio");
         } else {
             navigate("/login");
         }
