@@ -4,7 +4,7 @@ import { LandingPage } from './components/LandingPage';
 import { SignUp } from './components/Auth/SignUp';
 import { Login } from './components/Auth/Login';
 import { AuthProvider } from './components/Auth/AuthContext'; 
-import { PortfolioPage } from './components/PortfolioPage';
+// import { PortfolioPage } from './components/PortfolioPage';
 
 function App() {
     return (
