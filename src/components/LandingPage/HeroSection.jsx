@@ -8,7 +8,7 @@ export const HeroSection = () =>{
 
     const handleStartClick = () => {
         if (user) {
-            navigate("/");
+            navigate("/portfolio");
         } else {
             navigate("/login");
         }
