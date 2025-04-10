@@ -1,20 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, Lock } from "lucide-react";
 import { auth } from "../../../firebaseconfig";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useAuth } from "../Auth/AuthContext";
 
 import "./auth.css";
 
 export const Login = () => {
-
     const navigate = useNavigate();
     const [userEmail, setUserEmail] = useState("");
     const [userPassword, setUserPassword] = useState("");
     const [errorEmail, setErrorEmail] = useState("");
     const [errorPassword, setErrorPassword] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
 
     const handleLogin = async () => {
+        setLoading(true);
 
         let hasEmailError = false;
         let hasPasswordError = false;
@@ -24,37 +27,46 @@ export const Login = () => {
             hasEmailError = true;
         } else {
             setErrorEmail("");
-            hasEmailError = false;
         }
+
         if (!userPassword) {
             setErrorPassword("Password field can't be empty");
             hasPasswordError = true;
         } else {
-            hasPasswordError = false;
             setErrorPassword("");
         }
 
         if (!hasEmailError && !hasPasswordError && userEmail && userPassword) {
             try {
-                await login();
-                alert("Login Successful!!");
-                navigate('/');
+                await signInWithEmailAndPassword(auth, userEmail, userPassword);
+                setSuccess(true);
+                setLoading(false);
+
+                setTimeout(() => {
+                    navigate("/");
+                }, 2000);
             } catch (error) {
                 console.error("Login failed:", error);
-                alert("Incorrect email or password. Please try again.");
+                setLoading(false);
+                setErrorPassword("Incorrect email or password.");
             }
+        } else {
+            setLoading(false);
         }
-    }
-
-    const login = async () => {
-        await signInWithEmailAndPassword(auth,userEmail,userPassword);
-    }
+    };
 
     return (
         <div className="login-container">
             <div className="login-card">
                 <div className="login-content">
                     <h2>Welcome Back</h2>
+
+                    {success && (
+                        <div className="text-green-600 text-sm font-semibold text-center mb-4 transition-opacity duration-500">
+                            Login successful! Redirecting...
+                        </div>
+                    )}
+
                     <div className="form-container">
                         <div className="input-group">
                             <label>Email</label>
@@ -92,17 +104,22 @@ export const Login = () => {
                             <a href="#" className="forgot-password">Forgot password?</a>
                         </div>
 
-                        <button onClick={handleLogin} className="login-button">
-                            Login
+                        <button
+                            onClick={handleLogin}
+                            className={`login-button flex items-center justify-center transition-all duration-300 ${loading ? "opacity-70 cursor-not-allowed pulse" : ""
+                                }`}
+                            disabled={loading}
+                        >
+                            {loading ? <span className="loader mr-2"></span> : "Login"}
                         </button>
 
                         <p className="signup-text">
                             Don't have an account?{" "}
-                            <p className="signup-link" onClick={() => navigate('/signup')}>Sign up</p>
+                            <span className="signup-link" onClick={() => navigate('/signup')}>Sign up</span>
                         </p>
                     </div>
                 </div>
             </div>
         </div>
     );
-}
+};

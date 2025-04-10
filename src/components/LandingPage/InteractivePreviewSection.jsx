@@ -1,4 +1,20 @@
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../Auth/AuthContext"; 
+
 export const InteractivePreviewSection = ()=>{
+
+    const navigate = useNavigate();
+    const { user } = useAuth();
+
+    const handleStartClick = () => {
+        if (user) {
+            navigate("/"); // go to homepage if logged in
+        } else {
+            navigate("/login");
+        }
+    };
+
+
     return(
         <>
             <div className="py-20 bg-gradient-to-b from-gray-50 to-gray-100">
@@ -63,7 +79,6 @@ export const InteractivePreviewSection = ()=>{
                                 </div>
 
                                 <div className="border border-gray-200 rounded-lg overflow-hidden shadow-lg transform transition-transform hover:scale-105 duration-300">
-                                    {/* Header of the preview */}
                                     <div className="h-14 bg-gradient-to-r from-indigo-500 to-indigo-600 flex items-center px-5">
                                         <div className="flex space-x-3">
                                             <div className="h-2 w-2 bg-white rounded-full"></div>
@@ -73,7 +88,6 @@ export const InteractivePreviewSection = ()=>{
                                         <div className="h-5 w-32 bg-white opacity-50 rounded ml-4"></div>
                                     </div>
 
-                                    {/* Content of the preview */}
                                     <div className="p-6 bg-white">
                                         <div className="h-24 w-24 mx-auto rounded-full bg-gradient-to-br from-indigo-100 to-purple-200 flex items-center justify-center mb-5 border-4 border-white shadow-md">
                                             <div className="h-12 w-12 bg-indigo-400 rounded-full opacity-60"></div>
@@ -103,7 +117,7 @@ export const InteractivePreviewSection = ()=>{
                     </div>
 
                     <div className="text-center mt-8">
-                        <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg shadow-lg font-semibold transition-all duration-300 inline-flex items-center">
+                        <button onClick={handleStartClick} className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg shadow-lg font-semibold transition-all duration-300 inline-flex items-center">
                             Try It Now
                             <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
