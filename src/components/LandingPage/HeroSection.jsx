@@ -8,7 +8,7 @@ export const HeroSection = () =>{
 
     const handleStartClick = () => {
         if (user) {
-            navigate("/"); // go to homepage if logged in
+            navigate("/");
         } else {
             navigate("/login");
         }
