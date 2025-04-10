@@ -14,7 +14,7 @@ function App() {
                     <Route path="/" element={<LandingPage />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
-                    <Route path="/portfolio" element={<PortfolioPage />} />
+                    {/* <Route path="/portfolio" element={<PortfolioPage />} /> */}
                 </Routes>
             </AuthProvider>
         </Router>
