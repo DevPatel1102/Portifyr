@@ -8,7 +8,7 @@ export const InteractivePreviewSection = ()=>{
 
     const handleStartClick = () => {
         if (user) {
-            navigate("/"); // go to homepage if logged in
+            navigate("/");
         } else {
             navigate("/login");
         }
@@ -24,7 +24,7 @@ export const InteractivePreviewSection = ()=>{
 
                     <div className="bg-white rounded-xl shadow-2xl overflow-hidden max-w-5xl mx-auto border border-gray-100">
                         <div className="flex flex-col md:flex-row">
-                            {/* Left side: Controls */}
+                            {/* Left side */}
                             <div className="w-full md:w-1/2 bg-gray-50 p-8 border-r border-gray-200">
                                 <div className="flex items-center mb-6">
                                     <div className="w-3 h-3 bg-red-400 rounded-full mr-2"></div>
@@ -71,7 +71,7 @@ export const InteractivePreviewSection = ()=>{
                                 </div>
                             </div>
 
-                            {/* Right side: Preview */}
+                            {/* Right side */}
                             <div className="w-full md:w-1/2 p-8 bg-gray-50 bg-opacity-30">
                                 <div className="flex items-center mb-6">
                                     <h3 className="text-lg font-semibold text-gray-700">Live Preview</h3>
