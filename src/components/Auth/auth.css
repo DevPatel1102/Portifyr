@@ -184,6 +184,45 @@
     height: 18px;
     animation: spin 0.6s linear infinite;
 }
+.google-login-button {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 0.6rem 1rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.google-login-button:hover {
+    background-color: #f7f7f7;
+}
+
+.google-login-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+.or-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 1rem 0;
+}
+
+.or-line hr {
+    flex: 1;
+    border: none;
+    height: 1px;
+    background-color: #ccc; /* or use your theme color */
+}
+
+.or-line p {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #666;
+    white-space: nowrap;
+}
 
 @keyframes spin {
     0% {
@@ -194,6 +233,37 @@
     }
 }
 
+/* Page transition styles */
+.login-container {
+    transition: all 0.6s ease-in-out;
+}
+
+.page-loading {
+    opacity: 0;
+    filter: blur(10px);
+}
+
+.page-loaded {
+    opacity: 1;
+    filter: blur(0);
+}
+
+.login-card {
+    transition: all 0.8s ease-in-out;
+    transition-delay: 0.2s;
+}
+
+.card-loading {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(5px);
+}
+
+.card-loaded {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
 
 @media (max-width: 480px) {
     .login-card {

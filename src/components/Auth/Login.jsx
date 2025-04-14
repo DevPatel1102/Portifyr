@@ -3,7 +3,8 @@ import { Mail, Lock } from "lucide-react";
 import { auth } from "../../../firebaseconfig";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useAuth } from "../Auth/AuthContext";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import googleLogo from "../../assets/images/google_logo.png";
 
 import "./auth.css";
 
@@ -13,8 +14,16 @@ export const Login = () => {
     const [userPassword, setUserPassword] = useState("");
     const [errorEmail, setErrorEmail] = useState("");
     const [errorPassword, setErrorPassword] = useState("");
+    const [errorGoogleSignIn, setErrorGoogleSignIn] = useState("");
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [pageLoaded, setPageLoaded] = useState(false);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setPageLoaded(true);
+        }, 100);
+    }, []);
 
     const handleLogin = async () => {
         setLoading(true);
@@ -55,9 +64,26 @@ export const Login = () => {
         }
     };
 
+    const handleGoogleLogin = async () => {
+        setLoading(true);
+        try {
+            const provider = new GoogleAuthProvider();
+            await signInWithPopup(auth, provider);
+            setSuccess(true);
+            setTimeout(() => {
+                navigate("/");
+            }, 2000);
+        } catch (error) {
+            // console.error("Google sign-in failed:", error);
+            setErrorGoogleSignIn("Google sign-in failed. Try again.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
-        <div className="login-container">
-            <div className="login-card">
+        <div className={`login-container ${pageLoaded ? 'page-loaded' : 'page-loading'}`}>
+            <div className={`login-card ${pageLoaded ? 'card-loaded' : 'card-loading'}`}>
                 <div className="login-content">
                     <h2>Welcome Back</h2>
 
@@ -117,6 +143,20 @@ export const Login = () => {
                             Don't have an account?{" "}
                             <span className="signup-link" onClick={() => navigate('/signup')}>Sign up</span>
                         </p>
+                        <div className="or-line">
+                                <hr/>
+                                <p>OR</p>
+                                <hr/>
+                        </div>
+                        <button
+                            onClick={handleGoogleLogin}
+                            className="google-login-button flex items-center justify-center transition-all duration-300"
+                            disabled={loading}
+                        >
+                            <img src={googleLogo} alt="Google" className="w-5 h-5 mr-2" />
+                            Continue with Google
+                        </button>
+                        <center><span className="error-message">{errorGoogleSignIn}</span></center>
                     </div>
                 </div>
             </div>

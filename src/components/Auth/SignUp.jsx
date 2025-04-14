@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, Lock } from "lucide-react";
 import "./auth.css";
 import { auth } from "../../../firebaseconfig";
@@ -16,6 +16,13 @@ export const SignUp = () => {
     const [errorConfirmPassword, setErrorConfirmPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [pageLoaded, setPageLoaded] = useState(false);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setPageLoaded(true);
+        }, 100);
+    }, []);
 
     const handleSignUp = async () => {
         setLoading(true);
@@ -74,8 +81,8 @@ export const SignUp = () => {
     };
 
     return (
-        <div className="login-container">
-            <div className="login-card">
+        <div className={`login-container ${pageLoaded ? 'page-loaded' : 'page-loading'}`}>
+            <div className={`login-card ${pageLoaded ? 'card-loaded' : 'card-loading'}`}>
                 <div className="login-content">
                     <h2>Sign Up</h2>
 
