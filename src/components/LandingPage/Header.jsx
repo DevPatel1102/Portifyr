@@ -29,6 +29,13 @@ export const Header = () => {
                         <div className="hidden md:flex items-center">
                             <div className="flex space-x-6 mr-10">
                                 <a
+                                    href="/"
+                                    className="text-gray-600 hover:text-indigo-600 font-medium relative group px-2 py-1"
+                                >
+                                    <span className="relative z-10 transition-all duration-300">Home</span>
+                                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                                </a>
+                                <a
                                     href="/about"
                                     className="text-gray-600 hover:text-indigo-600 font-medium relative group px-2 py-1"
                                 >
