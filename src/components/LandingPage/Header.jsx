@@ -25,37 +25,36 @@ export const Header = () => {
                             <span className="text-2xl font-bold text-indigo-600">Portifyr</span>
                         </div>
 
-                        {/* Desktop Navigation */}
                         <div className="hidden md:flex items-center">
                             <div className="flex space-x-6 mr-10">
-                                <a
-                                    href="/"
+                                <p
+                                    onClick={() => navigate('/')}
                                     className="text-gray-600 hover:text-indigo-600 font-medium relative group px-2 py-1"
                                 >
                                     <span className="relative z-10 transition-all duration-300">Home</span>
                                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
-                                </a>
-                                <a
-                                    href="/about"
+                                </p>
+                                <p
+                                    onClick={() => navigate('/about')}
                                     className="text-gray-600 hover:text-indigo-600 font-medium relative group px-2 py-1"
                                 >
                                     <span className="relative z-10 transition-all duration-300">About</span>
                                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
-                                </a>
-                                <a
-                                    href="/pricing"
+                                </p>
+                                <p
+                                    onClick={() => navigate('/pricing')}
                                     className="text-gray-600 hover:text-indigo-600 font-medium relative group px-2 py-1"
                                 >
                                     <span className="relative z-10 transition-all duration-300">Pricing</span>
                                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
-                                </a>
-                                <a
-                                    href="/contact"
+                                </p>
+                                <p
+                                    onClick={() => navigate('/contact')}
                                     className="text-gray-600 hover:text-indigo-600 font-medium relative group px-2 py-1"
                                 >
                                     <span className="relative z-10 transition-all duration-300">Contact</span>
                                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
-                                </a>
+                                </p>
                             </div>
 
                             <div className="flex space-x-4">
@@ -86,7 +85,6 @@ export const Header = () => {
                             </div>
                         </div>
 
-                        {/* Mobile menu button */}
                         <div className="md:hidden flex items-center">
                             <button
                                 className="text-gray-700 focus:outline-none"
@@ -103,7 +101,6 @@ export const Header = () => {
                         </div>
                     </div>
 
-                    {/* Mobile Menu */}
                     {mobileMenuOpen && (
                         <div className="mt-4 md:hidden">
                             <div className="flex flex-col space-y-3 pb-3">
@@ -143,7 +140,6 @@ export const Header = () => {
                 </div>
             </nav>
 
-            {/* Sign Out Dialog */}
             {showDialog && (
                 <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center z-50">
                     <div className="bg-white/80 backdrop-blur-md rounded-xl p-6 shadow-lg w-[90%] max-w-md text-center border border-gray-200">

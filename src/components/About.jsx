@@ -59,35 +59,6 @@ const AboutHero = () => {
     );
 };
 
-const OurStory = () => {
-    return (
-        <div className="bg-white py-16">
-            <div className="container mx-auto px-6">
-                <div className="max-w-3xl mx-auto">
-                    <FadeInElement delay={300}>
-                        <h2 className="text-3xl font-bold mb-8 text-center">Our Story</h2>
-                    </FadeInElement>
-                    <FadeInElement delay={500}>
-                        <p className="text-lg text-gray-700 mb-6">
-                            Portifyr began in 2023 when a team of designers and developers recognized a common frustration: creating professional portfolios was too complicated and time-consuming.
-                        </p>
-                    </FadeInElement>
-                    <FadeInElement delay={700}>
-                        <p className="text-lg text-gray-700 mb-6">
-                            We set out to create a platform that would make portfolio creation intuitive and enjoyable, with real-time preview capabilities that let users see their changes instantly.
-                        </p>
-                    </FadeInElement>
-                    <FadeInElement delay={900}>
-                        <p className="text-lg text-gray-700">
-                            Today, Portifyr is trusted by over 10,000 creative professionals worldwide who use our platform to showcase their work and advance their careers.
-                        </p>
-                    </FadeInElement>
-                </div>
-            </div>
-        </div>
-    );
-};
-
 const MissionValues = () => {
     const values = [
         {
@@ -151,12 +122,10 @@ const TeamSection = () => {
     const team = [
         {
             name: "Dev Patel",
-            role: "Lead Developer",
             bio: "Full-stack developer focused on creating intuitive user experiences."
         },
         {
             name: "Kevin Barochiya",
-            role: "Founder & CEO",
             bio: "Former UX Designer with a passion for simplifying complex processes."
         }
     ];
@@ -177,7 +146,6 @@ const TeamSection = () => {
                                         {member.name.split(' ').map(n => n[0]).join('')}
                                     </div>
                                     <h3 className="text-xl font-semibold mb-2">{member.name}</h3>
-                                    <p className="text-indigo-600 mb-3">{member.role}</p>
                                     <p className="text-gray-600">{member.bio}</p>
                                 </div>
                             </FadeInElement>
@@ -220,12 +188,12 @@ const ContactCTA = () => {
                         >
                             Start Building Now
                         </button>
-                        <a
-                            href="mailto:support@portifyr.com"
+                        <p
+                            onClick={()=>navigate("/contact")}
                             className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:bg-opacity-20 transform hover:scale-105 transition duration-300"
                         >
                             Contact Us
-                        </a>
+                        </p>
                     </div>
                 </FadeInElement>
             </div>
@@ -288,7 +256,6 @@ export const About = () => {
             <AppStyles />
             <Header />
             <AboutHero />
-            <OurStory />
             <MissionValues />
             <TeamSection />
             <ContactCTA />

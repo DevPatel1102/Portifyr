@@ -51,7 +51,7 @@ const PricingPlan = ({ title, price, features, popular, ctaText }) => {
 
     const handleClick = () => {
         if (user) {
-            navigate("/checkout", { state: { plan: title } });
+            navigate("/", { state: { plan: title } });
         } else {
             navigate("/login", { state: { redirectTo: "/pricing", plan: title } });
         }
@@ -67,7 +67,7 @@ const PricingPlan = ({ title, price, features, popular, ctaText }) => {
             <div className="p-8">
                 <h3 className="text-2xl font-bold mb-4 text-gray-800">{title}</h3>
                 <div className="mb-6">
-                    <span className="text-4xl font-bold text-gray-900">${price}</span>
+                    <span className="text-4xl font-bold text-gray-900">₹{price}</span>
                     {price > 0 && <span className="text-gray-600 ml-2">/month</span>}
                 </div>
                 <div className="mb-8">
@@ -123,7 +123,7 @@ const PricingSection = () => {
         },
         {
             title: "Professional",
-            price: 9,
+            price: 599,
             features: [
                 { included: true, text: "3 portfolio websites" },
                 { included: true, text: "All templates" },
@@ -137,7 +137,7 @@ const PricingSection = () => {
         },
         {
             title: "Enterprise",
-            price: 29,
+            price: 999,
             features: [
                 { included: true, text: "Unlimited portfolios" },
                 { included: true, text: "Premium templates" },
@@ -147,7 +147,7 @@ const PricingSection = () => {
                 { included: true, text: "Advanced analytics dashboard" },
             ],
             popular: false,
-            ctaText: "Contact Sales",
+            ctaText: "Premium Plan",
         },
     ];
 
@@ -174,10 +174,6 @@ const FAQ = () => {
         {
             question: "Do you offer student discounts?",
             answer: "Yes! We offer a 50% discount for students with a valid student email address. Contact our support team to apply."
-        },
-        {
-            question: "What payment methods do you accept?",
-            answer: "We accept all major credit cards, PayPal, and Apple Pay. Enterprise customers can also pay by invoice."
         },
         {
             question: "Can I upgrade or downgrade my plan later?",
@@ -239,7 +235,14 @@ const AppStyles = () => {
 
 const CallToAction = () => {
     const navigate = useNavigate();
-
+    const { user } = useAuth();
+    const handleClick = () => {
+        if (user) {
+            navigate("/portfolio");
+        } else {
+            navigate("/login");
+        }
+    };
     return (
         <div className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-16">
             <div className="container mx-auto px-6 text-center">
@@ -249,7 +252,7 @@ const CallToAction = () => {
                         Join thousands of creatives who trust Portifyr to showcase their work to the world.
                     </p>
                     <button 
-                        onClick={() => navigate("/signup")}
+                        onClick={() => handleClick()}
                         className="bg-white text-indigo-600 px-8 py-3 rounded-lg shadow-lg font-semibold hover:bg-gray-100 transform hover:scale-105 transition duration-300"
                     >
                         Start Your Free Trial
@@ -262,7 +265,6 @@ const CallToAction = () => {
 
 export const PricingPage = () => {
     useEffect(() => {
-        // Scroll to top when component mounts
         window.scrollTo(0, 0);
         
         const observer = new IntersectionObserver((entries) => {

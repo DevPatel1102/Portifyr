@@ -39,7 +39,6 @@ const ContactFormSection = () => {
     const { user } = useAuth();
 
     useEffect(() => {
-        // Pre-fill form if user is logged in
         if (user && user.displayName && user.email) {
             setFormData(prev => ({
                 ...prev,
@@ -61,12 +60,10 @@ const ContactFormSection = () => {
         e.preventDefault();
         setIsSubmitting(true);
         
-        // Simulate form submission
         setTimeout(() => {
             setIsSubmitting(false);
             setIsSubmitted(true);
             
-            // Reset form after 3 seconds
             setTimeout(() => {
                 setIsSubmitted(false);
                 setFormData({
@@ -187,11 +184,10 @@ const ContactInfoSection = () => {
     return (
         <div className="bg-white py-16">
             <div className="container mx-auto px-6">
-                <div className="grid md:grid-cols-3 gap-8">
+                <div className="mx-20 grid md:grid-cols-2 gap-8">
                     {[
                         { title: "Email Us", icon: "✉️", content: "support@portifyr.com" },
                         { title: "Call Us", icon: "📱", content: "+91 7016957669" },
-                        { title: "Visit Us", icon: "📍", content: "Room No. 12 PDEU Raysan" }
                     ].map((item, i) => (
                         <FadeInElement key={i} delay={500 + i * 200}>
                             <div className="bg-gray-50 p-6 rounded-xl shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 text-center">
@@ -218,16 +214,12 @@ const FAQSection = () => {
             answer: "Simply sign up for an account, choose a template, and start customizing your portfolio. Our side-by-side editor makes it easy to see changes in real-time."
         },
         {
-            question: "Can I use my own domain name?",
-            answer: "Yes! Portifyr allows you to connect your custom domain to your portfolio. You can set this up in the settings section after creating your account."
-        },
-        {
             question: "Is Portifyr free to use?",
             answer: "We offer a free basic plan that includes essential features. For advanced customization options and premium templates, check out our affordable Pro plan."
         },
         {
-            question: "How can I export my portfolio?",
-            answer: "You can export your portfolio with a single click. Go to the 'Export' tab in your dashboard and choose your preferred format."
+            question: "How can I download my portfolio?",
+            answer: "You can download your portfolio with a single click. There is a button of download in besides the template section ."
         }
     ];
 
